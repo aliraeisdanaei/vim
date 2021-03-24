@@ -5,10 +5,6 @@
 " |____/ |_|
 "        
 " A customized init.vim for neovim (https://neovim.io/)     
-" 
-"
-" ------------------------------------------------------------
-"  Adjustments made by Ali Raeisdanaei
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -27,22 +23,22 @@ call plug#begin('~/.vim/pack/plugins/start')
 "{{ File management }}
     Plug 'vifm/vifm.vim'                               " Vifm
     Plug 'scrooloose/nerdtree'                         " Nerdtree
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " Highlighting Nerdtree
-    Plug 'ryanoasis/vim-devicons'                      " Icons for Nerdtree
+"    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " Highlighting Nerdtree
+"    Plug 'ryanoasis/vim-devicons'                      " Icons for Nerdtree
 "{{ Productivity }}
-    Plug 'vimwiki/vimwiki'                             " VimWiki 
-    Plug 'jreybert/vimagit'                            " Magit-like plugin for vim
+"    Plug 'vimwiki/vimwiki'                             " VimWiki 
+"    Plug 'jreybert/vimagit'                            " Magit-like plugin for vim
 "{{ Tim Pope Plugins }}
-   Plug 'tpope/vim-surround'                          " Change surrounding marks
+ "   Plug 'tpope/vim-surround'                          " Change surrounding marks
 "{{ Syntax Highlighting and Colors }}
-    Plug 'PotatoesMaster/i3-vim-syntax'                " i3 config highlighting
-    Plug 'kovetskiy/sxhkd-vim'                         " sxhkd highlighting
-    Plug 'vim-python/python-syntax'                    " Python highlighting
+"    Plug 'PotatoesMaster/i3-vim-syntax'                " i3 config highlighting
+"    Plug 'kovetskiy/sxhkd-vim'                         " sxhkd highlighting
+"    Plug 'vim-python/python-syntax'                    " Python highlighting
     Plug 'ap/vim-css-color'                            " Color previews for CSS
 "{{ Junegunn Choi Plugins }}
-    Plug 'junegunn/goyo.vim'                           " Distraction-free viewing
-    Plug 'junegunn/limelight.vim'                      " Hyperfocus on a range
-    Plug 'junegunn/vim-emoji'                          " Vim needs emojis!
+"    Plug 'junegunn/goyo.vim'                           " Distraction-free viewing
+"    Plug 'junegunn/limelight.vim'                      " Hyperfocus on a range
+"    Plug 'junegunn/vim-emoji'                          " Vim needs emojis!
 
 call plug#end()
 
@@ -66,18 +62,11 @@ set path+=**					" Searches current directory recursively.
 set wildmenu					" Display all matches when tab complete.
 set incsearch                   " Incremental search
 set hidden                      " Needed to keep multiple buffers open
-" set nobackup                    " No auto backups
-" set noswapfile                  " No swap
+set nobackup                    " No auto backups
+set noswapfile                  " No swap
 set t_Co=256                    " Set if term supports 256 colors.
-set number " relativenumber       " Display line numbers
+set number relativenumber       " Display line numbers
 set clipboard=unnamedplus       " Copy/paste between vim and other programs.
-set backspace=indent,eol,start  " Making Backspace work normally
-
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-
 syntax enable
 let g:rehash256 = 1
 
@@ -214,10 +203,10 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " Make adjusing split sizes a bit more friendly
-noremap <silent> <S-Left> :vertical resize +3<CR>
-noremap <silent> <S-Right> :vertical resize -3<CR>
-noremap <silent> <S-Up> :resize +3<CR>
-noremap <silent> <S-Down> :resize -3<CR>
+noremap <silent> <C-Left> :vertical resize +3<CR>
+noremap <silent> <C-Right> :vertical resize -3<CR>
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
 
 " Change 2 split windows from vert to horiz or horiz to vert
 map <Leader>th <C-w>t<C-w>H
@@ -236,6 +225,6 @@ au BufEnter *.org            call org#SetOrgFileType()
 
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
-" set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
