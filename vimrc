@@ -86,6 +86,37 @@ let g:rehash256 = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap ESC to ii
 :imap ii <Esc>
+" map CTRL-E to end-of-line (insert mode)
+imap <C-e> <esc>$i<right>
+" map CTRL-A to beginning-of-line (insert mode)
+imap <C-a> <esc>0i
+
+" CTRL-C to copy (visual mode)(insert mode)
+vmap <C-c> y
+imap <C-c> y
+" CTRL-X to cut (visual mode)(insert mode)
+vmap <C-x> x
+imap <C-c> x
+" CTRL-V to paste (insert mode)
+imap <C-v> <esc>P
+
+" CTRL-Z & Y to undo and redo 
+map <C-z> <esc>u
+map <C-y> <esc><C-R>
+imap <C-z> <esc>u
+imap <C-y> <esc><C-R>
+
+" Enter empty new line without going to insert mode
+map <C-o> O<esc>
+
+" CTRL-S to save
+map <C-s> :w <CR>
+imap <C-s> <esc> :w <CR>
+
+" Search for all occuronces of the word under cursor with * #
+set hlsearch!
+" toggles between highlight and no highlight
+noremap <F4> :set hlsearch! hlsearch?<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Status Line
@@ -198,9 +229,10 @@ map <Leader>ms :InstantMarkdownStop<CR>      " Kills the preview
 map <Leader>tt :vnew term://fish<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Mouse Scrolling
+" => Mouse Scrolling & Mouse Selection
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set mouse=nicr
+set mouse=a
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Splits and Tabbed Files
