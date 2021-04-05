@@ -118,6 +118,7 @@ set hlsearch!
 " toggles between highlight and no highlight
 noremap <F4> :set hlsearch! hlsearch?<CR>
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Status Line
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
