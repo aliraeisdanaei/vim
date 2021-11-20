@@ -46,7 +46,7 @@ noremap <F4> :set hlsearch! hlsearch?<CR>
 set laststatus=2
 
 " Uncomment to prevent non-normal modes showing in powerline and below powerline.
-set noshowmode
+"set noshowmode
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
