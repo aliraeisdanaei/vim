@@ -47,6 +47,10 @@ nnoremap <C-Left>  :vertical resize -2<cr>
 nnoremap <C-Right> :vertical resize +2<cr>
 nnoremap <C-Up>    :resize -2<cr>
 nnoremap <C-Down>  :resize +2<cr>
+nnoremap <Leader>f <C-w>\|<C-w>_    " Maximize current split
+nnoremap <C-f> <C-w>\|<C-w>_    " Maximize current split
+nnoremap <C-=> <C-w>=            " Equalize all splits
+nnoremap <Leader>= <C-w>=        " Alternative equalize
 
 " Auto-complete parentheses, brackets, and quotes
 inoremap ( ()<Left>
@@ -123,3 +127,6 @@ nnoremap <Leader>tp :tprev<cr>               " Previous tag match
 " CTRL-S to save
 map <C-s> :w <CR>
 imap <C-s> <esc> :w <CR>
+
+" Open vimrc
+nnoremap <Leader>v :tabnew ~/.vimrc<CR>
