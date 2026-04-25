@@ -129,4 +129,4 @@ map <C-s> :w <CR>
 imap <C-s> <esc> :w <CR>
 
 " Open vimrc
-nnoremap <Leader>v :tabnew ~/.vimrc<CR>
+nnoremap <Leader>v :tabnew ~/.config/vim/vimrc<CR>
