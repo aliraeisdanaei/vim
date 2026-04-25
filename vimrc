@@ -1,127 +1,125 @@
-set number " relativenumber       " Display line numbers
-set clipboard=unnamedplus       " Copy/paste between vim and other programs.
-set backspace=indent,eol,start  " Making Backspace work normally
+set number
+set relativenumber
+syntax on
+set clipboard=unnamedplus
 
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+set autoindent
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab             " Convert tabs to spaces (better for sharing code)
 
+set termguicolors
+set background=dark       " Optimize colors for dark terminal
 
-syntax enable
-let g:rehash256 = 1
+" Better search behavior
+set incsearch             " Highlight matches as you type
+set hlsearch              " Highlight all matches
+set ignorecase            " Case-insensitive search
+set smartcase             " Case-sensitive if uppercase in search
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Remap Keys
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" map CTRL-E to end-of-line (insert mode)
-imap <C-e> <esc>$i<right>
-" map CTRL-A to beginning-of-line (insert mode)
-imap <C-a> <esc>0i
+" Navigation and UI improvements
+set cursorline            " Highlight current line
+set scrolloff=5           " Keep 5 lines visible when scrolling
+set sidescroll=5          " Smooth horizontal scrolling
 
-" CTRL-C to copy (visual mode)(insert mode)
-vmap <C-c> y
-imap <C-c> y
-" CTRL-X to cut (visual mode)(insert mode)
-vmap <C-x> x
-imap <C-c> x
-" CTRL-V to paste (insert mode)
-imap <C-v> <esc>P
+" Better indentation
+filetype plugin indent on
+set cindent
+set cinoptions+=t0
 
-" CTRL-Z & Y to undo and redo 
-map <C-z> <esc>u
-map <C-y> <esc><C-R>
-imap <C-z> <esc>u
-imap <C-y> <esc><C-R>
+" ===== SET LEADER KEY =====
+let mapleader = " "       " Use spacebar as leader key
+let maplocalleader = ","  " Use comma for local leader (in specific filetypes)
+
+" Keymaps for column markers
+nnoremap <Leader>c :set colorcolumn=80<cr>
+nnoremap <Leader>n :set colorcolumn=-80<cr>
+
+" Better split navigation (more intuitive)
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" Resize splits easily
+nnoremap <C-Left>  :vertical resize -2<cr>
+nnoremap <C-Right> :vertical resize +2<cr>
+nnoremap <C-Up>    :resize -2<cr>
+nnoremap <C-Down>  :resize +2<cr>
+
+" Auto-complete parentheses, brackets, and quotes
+inoremap ( ()<Left>
+inoremap [ []<Left>
+inoremap { {}<Left>
+inoremap " ""<Left>
+inoremap ' ''<Left>
+
+" Smart closing bracket handling
+inoremap ) <c-r>=strpart(getline('.'), col('.')-1, 1) == ')' ? "\<Del>" : ')'<cr>
+inoremap ] <c-r>=strpart(getline('.'), col('.')-1, 1) == ']' ? "\<Del>" : ']'<cr>
+inoremap } <c-r>=strpart(getline('.'), col('.')-1, 1) == '}' ? "\<Del>" : '}'<cr>
+
+" Better command mode completion
+set wildmode=longest,list,full
+set wildmenu              " Show menu for tab completion
+
+" Performance
+set lazyredraw            " Don't redraw during macros
+set ttyfast               " Faster terminal connection
+
+" Don't show mode (lightline/airline shows it)
+set noshowmode
+
+" ===== CURSOR SHAPE =====
+let &t_SI = "\e[6 q"      " Insert mode: thin blinking line
+let &t_SR = "\e[4 q"      " Replace mode: blinking underscore
+let &t_EI = "\e[2 q"      " Normal mode: blinking block
+
+if has('nvim')
+  set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+endif
+
+" ===== RIPGREP CONFIGURATION =====
+" ===== RIPGREP CONFIGURATION =====
+set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --glob=!tags
+set grepformat=%f:%l:%c:%m
+
+nnoremap <Leader>rg :grep<Space>
+nnoremap <Leader>rw :grep<Space><C-r><C-w><cr>
+nnoremap <Leader>rf :grep<Space>--type<Space>
+
+augroup quickfix
+  autocmd!
+  autocmd QuickFixCmdPost *grep* copen
+augroup END
+
+let mapleader = " "
+
+" ===== TOGGLE LINE NUMBERS =====
+nnoremap <Leader>ln :set relativenumber! set number<cr>
+nnoremap <Leader>rn :set relativenumber<cr>
+
+" ===== CUSTOM LEADER KEYBINDINGS =====
+nnoremap <Leader>w :w<cr>                    " Save file
+nnoremap <Leader>q :q<cr>                    " Quit
+nnoremap <Leader>x :wq<cr>                   " Save and quit
+nnoremap <Leader>e :e<Space>
+nnoremap <Leader>vs :vsplit<cr>              " Vertical split
+nnoremap <Leader>hs :split<cr>               " Horizontal split
+nnoremap <Leader>tn :tabnew<cr>              " New tab
+nnoremap <Leader>tc :tabclose<cr>            " Close tab
+nnoremap <Leader>to :tabo<cr>                " Close other tabs
+
+" ===== CTAGS NAVIGATION =====
+nnoremap <Leader>tt :!ctags -R<cr>           " Generate tags
+nnoremap <C-]> <cmd>execute "tag " . expand("<cword>")<cr>  " Jump to definition
+nnoremap <C-[> <cmd>pop<cr>                  " Jump back
+nnoremap <Leader>ts :tag<Space>              " Search for tag
+nnoremap <Leader>tl :tags<cr>                " List tag stack
+nnoremap <Leader>tn :tnext<cr>               " Next tag match
+nnoremap <Leader>tp :tprev<cr>               " Previous tag match
 
 " CTRL-S to save
 map <C-s> :w <CR>
 imap <C-s> <esc> :w <CR>
-
-" Search for all occuronces of the word under cursor with * #
-set hlsearch!
-" toggles between highlight and no highlight
-noremap <F4> :set hlsearch! hlsearch?<CR>
-
-" Always show statusline
-set laststatus=2
-
-" Uncomment to prevent non-normal modes showing in powerline and below powerline.
-"set noshowmode
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set expandtab                   " Use spaces instead of tabs.
-set smarttab                    " Be smart using tabs ;)
-set shiftwidth=4                " One tab == four spaces.
-set tabstop=4                   " One tab == four spaces.
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Theming
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-highlight LineNr           ctermfg=8    ctermbg=none    cterm=none
-highlight CursorLineNr     ctermfg=7    ctermbg=8       cterm=none
-highlight VertSplit        ctermfg=0    ctermbg=8       cterm=none
-highlight Statement        ctermfg=2    ctermbg=none    cterm=none
-highlight Directory        ctermfg=4    ctermbg=none    cterm=none
-highlight StatusLine       ctermfg=7    ctermbg=8       cterm=none
-highlight StatusLineNC     ctermfg=7    ctermbg=8       cterm=none
-highlight NERDTreeClosable ctermfg=2
-highlight NERDTreeOpenable ctermfg=8
-highlight Comment          ctermfg=4    ctermbg=none    cterm=italic
-highlight Constant         ctermfg=12   ctermbg=none    cterm=none
-highlight Special          ctermfg=4    ctermbg=none    cterm=none
-highlight Identifier       ctermfg=6    ctermbg=none    cterm=none
-highlight PreProc          ctermfg=5    ctermbg=none    cterm=none
-highlight String           ctermfg=12   ctermbg=none    cterm=none
-highlight Number           ctermfg=1    ctermbg=none    cterm=none
-highlight Function         ctermfg=1    ctermbg=none    cterm=none
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Open terminal inside Vim
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <Leader>tt :vnew term://fish<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Mouse Scrolling & Mouse Selection
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set mouse=nicr
-set mouse=a
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Splits and Tabbed Files
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set splitbelow splitright
-
-" Remap splits navigation to just CTRL + hjkl
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" Make adjusing split sizes a bit more friendly
-noremap <silent> <S-Left> :vertical resize +3<CR>
-noremap <silent> <S-Right> :vertical resize -3<CR>
-noremap <silent> <S-Up> :resize +3<CR>
-noremap <silent> <S-Down> :resize -3<CR>
-
-" Change 2 split windows from vert to horiz or horiz to vert
-map <Leader>th <C-w>t<C-w>H
-map <Leader>tk <C-w>t<C-w>K
-
-" Removes pipes | that act as seperators on splits
-set fillchars+=vert:\ 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Other Stuff
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python_highlight_all = 1
-
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
-au BufEnter *.org            call org#SetOrgFileType()
-
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-" set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar
