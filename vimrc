@@ -118,7 +118,8 @@ nnoremap <Leader>to :tabo<cr>                " Close other tabs
 " ===== CTAGS NAVIGATION =====
 nnoremap <Leader>tt :!ctags -R<cr>           " Generate tags
 nnoremap <C-]> <cmd>execute "tag " . expand("<cword>")<cr>  " Jump to definition
-nnoremap <C-[> <cmd>pop<cr>                  " Jump back
+" nnoremap <C-[> <cmd>pop<cr>                  " Jump back
+nnoremap <C-t> <cmd>pop<cr>                  " Jump back (standard vim key)
 nnoremap <Leader>ts :tag<Space>              " Search for tag
 nnoremap <Leader>tl :tags<cr>                " List tag stack
 nnoremap <Leader>tn :tnext<cr>               " Next tag match
