@@ -111,7 +111,7 @@ nnoremap <Leader>x :wq<cr>                   " Save and quit
 nnoremap <Leader>e :e<Space>
 nnoremap <Leader>vs :vsplit<cr>              " Vertical split
 nnoremap <Leader>hs :split<cr>               " Horizontal split
-nnoremap <Leader>tn :tabnew<cr>              " New tab
+nnoremap <Leader>nt :tabnew<cr>              " New tab
 nnoremap <Leader>tc :tabclose<cr>            " Close tab
 nnoremap <Leader>to :tabo<cr>                " Close other tabs
 
